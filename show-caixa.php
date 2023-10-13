@@ -124,7 +124,9 @@ include_once "show_action.php";
                         <td class="text-right font-weight-bold"><?= ($item['movimento'] == 'entrada') ? number_format($item['valor_movimento'], 2, ',', '.') : '-' ?></td>
                         <td class="text-right font-weight-bold"><?= ($item['movimento'] == 'saida') ? number_format($item['valor_movimento'], 2, ',', '.') : '-' ?></td>
                         <td class="text-right font-weight-bold <?= ($item['saldo_atual'] >= 0) ? 'text-primary' : 'text-danger' ?>"><?= number_format($item['saldo_atual'], 2, ',', '.') ?></td>
-                        <td title="Detalhes do Lançamento" class="det-lanc mx-2 my-1"><a href="financeiro/lancamento-editar/?id=<?= $id ?>&id_lancamento=<?= $item['id'] ?>&saldo=<?= $saldo_atual ?>"></a></td>
+                        <td title="Editar Lançamento" class="mx-2 my-1">
+                            <i class="fa-solid fa-pen-to-square action-icon" onclick="modal_edit(<?= $item['id'] ?>)"></i>
+                        </td>
                         </tr>
                     <?php endforeach; ?>
             </table>
@@ -180,6 +182,64 @@ include_once "show_action.php";
             </div>
         </div>
     </div>
+
+    <!-- Modal Editar Lançamento -->
+    <div class="modal fade" id="edit-lancamento" tabindex="-1" aria-labelledby="add-new-lancamento" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="edit-lancamento.php" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="id_caixa" required>
+                    <input type="hidden" name="id_lancamento" required>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adicionar lançamento</h5>
+                        <h6><small>Caixa: <?= $caixa['nome'] ?></small></h6>
+                        <h6><small>Saldo Disponível: R$ <?= number_format($saldo_disponivel, 2, ',', '.') ?></small></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="discriminacao_movimento">Discriminação do Lançamento</label>
+                                    <input type="text" class="form-control" name="discriminacao_movimento" id="discriminacao_movimento" required>
+                                    <div class="invalid-feedback">O campo é obrigatório.</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label for="data_movimento">Data do Lançamento</label>
+                                            <input type="date" class="form-control" name="data_movimento" id="data_movimento" required>
+                                            <div class="invalid-feedback">O campo é obrigatório.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label for="valor_movimento">Valor do Lançamento</label>
+                                            <input type="text" class="form-control mask_value" name="valor_movimento" id="valor_movimento" required>
+                                            <div class="invalid-feedback">O campo é obrigatório.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm">
+                                        <label for="movimento">Tipo do Movimento</label>
+                                        <select name="movimento" id="movimento" class="form-control" required>
+                                            <option value="entrada">Entrada</option>
+                                            <option value="saida">Saida</option>
+                                        </select>
+                                        <div class="invalid-feedback">O campo é obrigatório.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

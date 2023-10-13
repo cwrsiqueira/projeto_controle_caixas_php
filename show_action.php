@@ -46,14 +46,14 @@ if ($sql->rowCount() > 0) {
 foreach ($lancamentos as $key => $item) {
     $entradas = 0;
     $saidas = 0;
-    $sql = $db->prepare("SELECT SUM(valor_movimento) as entradas FROM financ_caixas_movimentos WHERE id_caixa = :id_caixa AND movimento = 'entrada' AND data_movimento <= :data_movimento");
+    $sql = $db->prepare("SELECT SUM(valor_movimento) as entradas FROM caixas_lancamentos WHERE id_caixa = :id_caixa AND movimento = 'entrada' AND data_movimento <= :data_movimento");
     $sql->bindValue(":id_caixa", $caixa['id']);
     $sql->bindValue(":data_movimento", $item['data_movimento']);
     $sql->execute();
     if ($sql->rowCount() > 0) {
         $entradas = $sql->fetch(PDO::FETCH_ASSOC)['entradas'];
     }
-    $sql = $db->prepare("SELECT SUM(valor_movimento) as saidas FROM financ_caixas_movimentos WHERE id_caixa = :id_caixa AND movimento = 'saida' AND data_movimento <= :data_movimento");
+    $sql = $db->prepare("SELECT SUM(valor_movimento) as saidas FROM caixas_lancamentos WHERE id_caixa = :id_caixa AND movimento = 'saida' AND data_movimento <= :data_movimento");
     $sql->bindValue("id_caixa", $caixa['id']);
     $sql->bindValue(":data_movimento", $item['data_movimento']);
     $sql->execute();

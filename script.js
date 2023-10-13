@@ -53,3 +53,27 @@ if (myModal !== null) {
         myInput.focus();
     });
 }
+
+function modal_edit(id) {
+    if (id === undefined) {
+        alert('ID inválido');
+        return false;
+    }
+    // $('#edit-lancamento').modal('show');
+
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", `ajax.php?id=${id}&action=edit_modal`, true);
+    ajax.setRequestHeader("Content-type", "application/json");
+    ajax.send();
+
+    ajax.onreadystatechange = function () {
+        if (ajax.readyState === 4) {
+            if (ajax.status === 200) {
+                console.log(typeof (ajax.responseText));
+            } else {
+                console.log(ajax.status);
+            }
+        }
+
+    }
+}

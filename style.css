@@ -1,0 +1,28 @@
+.busca-result {
+  color: #646464;
+  border-top: 3px solid #ccc;
+}
+
+.hidden {
+  display: none;
+}
+
+i.action-icon {
+  font-size: 22px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+i.action-icon:hover {
+  transform: scale(1.2);
+}
+
+#btn-search,
+#btn-clean {
+  cursor: pointer;
+}
+
+#btn-filter-date-clean,
+#btn-filter-date {
+  cursor: pointer;
+}

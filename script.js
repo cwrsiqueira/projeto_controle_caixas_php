@@ -49,7 +49,6 @@ var myModal = document.querySelector('#add-new-caixa');
 var myInput = document.querySelector('input[name=nome]');
 if (myModal !== null) {
     myModal.addEventListener('shown.bs.modal', function () {
-        console.log('antes de abrir o modal');
         myInput.focus();
     });
 }
@@ -59,7 +58,6 @@ function modal_edit(id) {
         alert('ID inválido');
         return false;
     }
-    // $('#edit-lancamento').modal('show');
 
     var ajax = new XMLHttpRequest();
     ajax.open("GET", `ajax.php?id=${id}&action=edit_modal`, true);
@@ -69,7 +67,18 @@ function modal_edit(id) {
     ajax.onreadystatechange = function () {
         if (ajax.readyState === 4) {
             if (ajax.status === 200) {
-                console.log(typeof (ajax.responseText));
+                let res = JSON.parse(ajax.responseText);
+                if (res == 'erro') {
+                    alert('Erro! Algo saiu errado, tente novamente.');
+                    return false;
+                }
+                console.log(res.valor_movimento.toLocaleString('pt-BR'))
+                document.querySelector('#edit_discriminacao_movimento').value = res.discriminacao_movimento;
+                document.querySelector('#edit_data_movimento').value = res.data_movimento.split(' ')[0];
+                document.querySelector('#edit_valor_movimento').value = parseFloat(res.valor_movimento).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                document.querySelector('#edit_movimento').value = res.movimento;
+
+                $('#edit-lancamento').modal('show');
             } else {
                 console.log(ajax.status);
             }

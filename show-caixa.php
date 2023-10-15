@@ -73,8 +73,8 @@ include_once "show_action.php";
                 <div class="input-group">
                     <span title="Limpar Busca" class="input-group-text" id="btn-filter-date-clean"><i class="fa-solid fa-rotate-left"></i></span>
                     <span title="Buscar" class="input-group-text" id="btn-filter-date"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    <input type="date" class="form-control" name="data_ini" value="<?= date("Y-m-01") ?>">
-                    <input type="date" class="form-control" name="data_fin" value="<?= date("Y-m-t") ?>">
+                    <input type="date" class="form-control" name="data_ini" value="<?= $data_ini ?? date("Y-m-01") ?>">
+                    <input type="date" class="form-control" name="data_fin" value="<?= $data_fin ?? date("Y-m-t") ?>">
                 </div>
             </form>
         </div>
@@ -192,36 +192,39 @@ include_once "show_action.php";
                     <input type="hidden" name="id_lancamento" required>
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Adicionar lançamento</h5>
-                        <h6><small>Caixa: <?= $caixa['nome'] ?></small></h6>
-                        <h6><small>Saldo Disponível: R$ <?= number_format($saldo_disponivel, 2, ',', '.') ?></small></h6>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
+                            <h6><small>Caixa: <?= $caixa['nome'] ?></small></h6>
+                            <h6><small>Saldo Disponível: R$ <?= number_format($saldo_atual, 2, ',', '.') ?></small></h6>
+                        </div>
+                        <hr>
+                        <div class="row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="discriminacao_movimento">Discriminação do Lançamento</label>
-                                    <input type="text" class="form-control" name="discriminacao_movimento" id="discriminacao_movimento" required>
+                                    <input type="text" class="form-control" name="discriminacao_movimento" id="edit_discriminacao_movimento" value="" required>
                                     <div class="invalid-feedback">O campo é obrigatório.</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
                                         <div class="form-group">
                                             <label for="data_movimento">Data do Lançamento</label>
-                                            <input type="date" class="form-control" name="data_movimento" id="data_movimento" required>
+                                            <input type="date" class="form-control" name="data_movimento" id="edit_data_movimento" required>
                                             <div class="invalid-feedback">O campo é obrigatório.</div>
                                         </div>
                                     </div>
                                     <div class="col-sm">
                                         <div class="form-group">
                                             <label for="valor_movimento">Valor do Lançamento</label>
-                                            <input type="text" class="form-control mask_value" name="valor_movimento" id="valor_movimento" required>
+                                            <input type="text" class="form-control mask_value" name="valor_movimento" id="edit_valor_movimento" required>
                                             <div class="invalid-feedback">O campo é obrigatório.</div>
                                         </div>
                                     </div>
                                     <div class="col-sm">
                                         <label for="movimento">Tipo do Movimento</label>
-                                        <select name="movimento" id="movimento" class="form-control" required>
+                                        <select name="movimento" id="edit_movimento" class="form-control" required>
                                             <option value="entrada">Entrada</option>
                                             <option value="saida">Saida</option>
                                         </select>

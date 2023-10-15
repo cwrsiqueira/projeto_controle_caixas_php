@@ -10,7 +10,7 @@ if ($action && $action === "edit_modal") {
     $sql = $db->prepare("SELECT id, id_caixa, movimento, data_movimento, discriminacao_movimento, valor_movimento FROM caixas_lancamentos WHERE id = :id");
     $sql->bindValue(":id", $id);
     $sql->execute();
-    if ($sql->rowCount() > 0) {
+    if ($sql->rowCount() <= 0) {
         echo json_encode("erro");
         exit;
     }

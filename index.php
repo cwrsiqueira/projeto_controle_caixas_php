@@ -71,9 +71,17 @@ include_once "index_action.php";
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item <?= ($p <= 1) ? 'hidden' : ''; ?>"><a class="page-link <?= ($p <= 2) ? 'rounded-left' : ''; ?>" href="?p=<?= $p - 1; ?>&busca=<?= $_GET['busca'] ?? ''; ?>&rpp=<?= $_GET['rpp'] ?? ''; ?>"><?= $p - 1; ?></a></li>
-                    <li class="page-item active"><span class="page-link <?= ($p <= 1) ? 'rounded-left' : ''; ?> <?= ($p >= $qt_paginas) ? 'rounded-right' : ''; ?>"><?= $p; ?></span></li>
-                    <li class="page-item <?= ($p >= $qt_paginas) ? 'hidden' : ''; ?>"><a class="page-link <?= ($p >= $qt_paginas - 1) ? 'rounded-right' : ''; ?>" href="?p=<?= $p + 1; ?>&busca=<?= $_GET['busca'] ?? ''; ?>&rpp=<?= $_GET['rpp'] ?? ''; ?>"><?= $p + 1; ?></a></li>
+
+                    <li class="page-item <?= ($p <= 1) ? 'hidden' : ''; ?>">
+                        <a class="page-link <?= ($p <= 2) ? 'rounded-left' : ''; ?>" href="?p=<?= $p - 1; ?>&busca=<?= $_GET['busca'] ?? ''; ?>&rpp=<?= $_GET['rpp'] ?? ''; ?>"><?= $p - 1; ?></a>
+                    </li>
+
+                    <li class="page-item active">
+                        <span class="page-link <?= ($p <= 1) ? 'rounded-left' : ''; ?> <?= ($p >= $qt_paginas) ? 'rounded-right' : ''; ?>"><?= $p; ?></span>
+                    </li>
+                    <li class="page-item <?= ($p >= $qt_paginas) ? 'hidden' : ''; ?>">
+                        <a class="page-link <?= ($p >= $qt_paginas - 1) ? 'rounded-right' : ''; ?>" href="?p=<?= $p + 1; ?>&busca=<?= $_GET['busca'] ?? ''; ?>&rpp=<?= $_GET['rpp'] ?? ''; ?>"><?= $p + 1; ?></a>
+                    </li>
                     <li class="page-item">
                         <a title="Última Página" class="page-link <?= ($p >= $qt_paginas - 1) ? 'hidden' : ''; ?>" href="?p=<?= $qt_paginas; ?>&busca=<?= $_GET['busca'] ?? ''; ?>&rpp=<?= $_GET['rpp'] ?? ''; ?>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>

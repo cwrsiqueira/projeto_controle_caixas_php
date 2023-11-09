@@ -27,7 +27,7 @@ include_once "show_action.php";
                 <div class="col">
                     <div class="form-group">
                         <label for="nome" class="form-label">Nome do Caixa</label>
-                        <input type="text" name="nome" class="form-control" id="nome" value="<?= $caixa['nome']; ?>">
+                        <input type="text" name="nome" class="form-control" id="nome" value="<?= $caixa['nome']; ?>" required>
                         <div class="invalid-feedback">O campo é obrigatório.</div>
                     </div>
                 </div>
@@ -188,8 +188,8 @@ include_once "show_action.php";
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form action="edit-lancamento.php" method="post" class="needs-validation" novalidate>
-                    <input type="hidden" name="id_caixa" required>
-                    <input type="hidden" name="id_lancamento" required>
+                    <input type="hidden" name="id_caixa" id="edit_id_caixa" required>
+                    <input type="hidden" name="id" id="edit_id_lancamento" required>
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Adicionar lançamento</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

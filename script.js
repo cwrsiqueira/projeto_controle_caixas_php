@@ -39,6 +39,7 @@ if (rpp !== null) {
 }
 
 let icon_delete = document.querySelectorAll('.icon-delete');
+console.log(icon_delete)
 icon_delete.forEach(icon => {
     icon.addEventListener('click', function () {
         document.querySelector('input[name=id]').value = icon.dataset.id;
@@ -72,11 +73,13 @@ function modal_edit(id) {
                     alert('Erro! Algo saiu errado, tente novamente.');
                     return false;
                 }
-                console.log(res.valor_movimento.toLocaleString('pt-BR'))
+                console.log(res)
                 document.querySelector('#edit_discriminacao_movimento').value = res.discriminacao_movimento;
                 document.querySelector('#edit_data_movimento').value = res.data_movimento.split(' ')[0];
                 document.querySelector('#edit_valor_movimento').value = parseFloat(res.valor_movimento).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 document.querySelector('#edit_movimento').value = res.movimento;
+                document.querySelector('#edit_id_caixa').value = res.id_caixa;
+                document.querySelector('#edit_id_lancamento').value = res.id;
 
                 $('#edit-lancamento').modal('show');
             } else {

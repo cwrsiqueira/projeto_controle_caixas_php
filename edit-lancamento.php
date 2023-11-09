@@ -20,14 +20,14 @@ if (!$campos_vazios) {
     }
     $values = implode(", ", $values);
 
-    $query = "INSERT INTO caixas_lancamentos SET $values";
+    $query = "UPDATE caixas_lancamentos SET $values WHERE id = :id";
 
     $sql = $db->prepare($query);
     foreach ($dados as $key => $value) {
         $sql->bindValue(":" . $key, $value);
     }
     if (!$sql->execute()) {
-        $_SESSION['msg'] = "<p class='alert alert-danger'>Erro! Lançamento não cadastrado.</p>";
+        $_SESSION['msg'] = "<p class='alert alert-danger'>Erro! Lançamento não editado.</p>";
         header("Location: show-caixa.php?id=" . $dados['id_caixa']);
         exit;
     }
